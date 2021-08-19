@@ -1,13 +1,11 @@
 // Setup empty JS object to act as endpoint for all routes
-let projectData = [];
-let projectDataIdx = 0;
+let projectData = {};
 
 // Require Express to run server and routes
 var express = require('express')
 
 // Start up an instance of app
 var app = express()
-
 
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
@@ -23,20 +21,12 @@ app.use(cors())
 // Initialize the main project folder
 app.use(express.static('website'));
 
-app.get('/getMostRecentEntry', (req,res) => {
-    if (projectData.length === 0) {
-        res.status(409).json({error: "Empty Data. None Exists."});
-    } else {
-        res.send(projectData[projectDataIdx]);
-        if (projectDataIdx > 0) projectDataIdx--;
-        console.log(projectDataIdx)
-    }
+app.get('/getEntry', (req,res) => {
+    res.send(projectData);
 })
 
 app.post('/addNewPost', async (req,res) => {
-    console.log(req.body)
-    projectData.push(req.body)
-    projectDataIdx = projectData.length - 1;
+    projectData = req.body;
     res.send({sucess : true})
 })
 
