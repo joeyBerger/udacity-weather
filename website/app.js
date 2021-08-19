@@ -11,7 +11,7 @@ const dataHeaders = {
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let date = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let date = (d.getMonth() + 1)+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 /* Helper Functions */
 // Get data from key inputs
